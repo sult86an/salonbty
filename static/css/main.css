@@ -1,0 +1,106 @@
+@font-face { font-family: Elsie-Regular;  src: url('../fonts/Elsie-Regular.ttf');}
+@font-face { font-family: Tajawal-Regular; src: url('../fonts/Tajawal-Regular.ttf'); }
+@font-face { font-family: Tajawal-Bold; src: url('../fonts/Tajawal-Bold.ttf'); }
+
+
+body, html{
+    font-family: Tajawal-Regular !important;
+}
+  body{
+            direction: rtl !important;
+            text-align: right !important;
+        }
+       input{
+           box-shadow: none !important;
+           background-color: #fff !important;
+           height: 42px !important;
+       }
+       a{
+           text-decoration:none !important;
+       }
+        .sidebar {
+            padding-right: 0 !important;
+            padding-left: auto !important;
+            margin-right: 0 !important;
+        }
+        .navbar-nav{
+             padding-right: 0 !important;
+            padding-left: auto !important;
+        }
+        @media (min-width: 768px){
+            .sidebar .nav-item .nav-link {
+                display: block;
+                width: 100%;
+                text-align: right !important;
+                padding: 1rem;
+                width: 14rem;
+                }
+            }
+        @media (min-width: 768px){
+            .sidebar .nav-item .nav-link[data-toggle=collapse]::after {
+            width: 1rem;
+            text-align: center;
+            float: left !important;
+            vertical-align: 0;
+            border: 0;
+            font-weight: 900;
+            }
+        }
+        @media (min-width: 768px){
+            .sidebar .nav-item .nav-link[data-toggle=collapse].collapsed::after {
+                content: '\f104';
+            }
+        }
+        .input-group>.input-group-append>.btn, .input-group>.input-group-append>.input-group-text, .input-group>.input-group-prepend:first-child>.btn:not(:first-child), .input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child), .input-group>.input-group-prepend:not(:first-child)>.btn, .input-group>.input-group-prepend:not(:first-child)>.input-group-text {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+        .dropdown-item {
+            text-align: right !important;
+        }
+        #salon{
+            font-family: Elsie-Regular !important;
+            font-size: xx-large;
+        }
+       .sidebar.toggled #sidebarToggle::after {
+          content: '\f104' !important;
+        }
+        .sidebar #sidebarToggle::after {
+          content: '\f105' !important;
+        }
+        .text-xs {
+            font-size: 1rem;
+        }
+
+        footer{
+            color: #996668 !important;
+        }
+        .head-nav-icon>i{
+            font-size: x-large !important;
+        }
+        .topbar .nav-item .nav-link {
+            height: 4.375rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 0  !important;
+            margin: 8px;
+        }
+        .fa-search:before {
+            content: "\f002";
+            font-size: large;
+        }
+          @media (max-width: 768px) {
+              .sidebar .nav-item .nav-link span {
+                  font-size: .7rem !important;
+                  display: block;
+              }
+          }
+        .navbar{
+            padding: .5rem .5rem;
+        }
