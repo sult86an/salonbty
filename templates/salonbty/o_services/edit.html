@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}تعديل الخدمات - صالون{% endblock %}
+    {% block content %}
+        <style>
+        #wrapper #content-wrapper #content {
+        -ms-flex: 1 0 auto;
+        flex: 0 0 auto;
+}
+        </style>
+         <div class="container-fluid" style="position: relative">
+
+          <!-- Page Heading -->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+          <h1 class="h3 mb-2 text-brown">تعديل الخدمات</h1>
+            </div>
+              <div class="card-body">
+            <form method="POST" class="post-form" action="{% url 'update_service' service.id %}">
+                    {% csrf_token %}  
+            <br>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">اسم الخدمة:</label>
+                <div class="col-sm-4">  
+                    <input class="form-control" type="text" name="name" id="id_name" required maxlength="100" value="{{ service.name }}" />
+                </div>  
+              </div>  
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">سعر الخدمة:</label>
+                <div class="col-sm-4">  
+                    <input class="form-control" type="text" name="price" id="id_price" required maxlength="254" value="{{ service.price }}" />
+                </div>  
+              </div>
+               <div class="form-group row">
+                <label class="col-sm-2 col-form-label">الزمن المقدّر</label>
+                <div class="col-sm-4">
+                    <select id="id_minTime" name="minTime" class="form-control" type="text">
+                    <option value="{{ service.minTime }}" >{{ service.minTime }} </option>
+                    <option value="00:30">00:30</option>
+                    <option value="01:00">01:00</option>
+                    <option value="01:30">01:30</option>
+                    <option value="02:00">02:00</option>
+                    <option value="02:30">02:30</option>
+                    <option value="03:00">03:00</option>
+                    <option value="03:30">03:30</option>
+                    <option value="04:00">04:00</option>
+                </select>
+                </div>
+            </div>
+                <br>
+                <div class="form-group row">  
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-4">
+                    <button type="submit" class="btn btn-brown form-control">حفظ التغييرات</button>
+                </div>  
+              </div>  
+            </form>
+                
+            </div>
+          </div>
+         </div>
+{% endblock %}

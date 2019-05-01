@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}الطلبات الملغية - صالون{% endblock %}
+    {% block content %}
+        <style>
+        #wrapper #content-wrapper #content {
+        -ms-flex: 1 0 auto;
+        flex: 0 0 auto;
+}
+        </style>
+         <div class="container-fluid" style="position: relative">
+
+          <!-- Page Heading -->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+          <h1 class="h3 mb-2 text-brown">الطلبات الملغية</h1>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                  <thead style="background-color: #996668; color: white; text-align: center">
+                    <tr>
+                        <th>#</th>
+                      <th>اسم العميلة</th>
+                      <th>تفاصيل الحجز</th>
+                      <th>اسم العاملة</th>
+                      <th>الوقت</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for order in orders %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ order.customer }}</td>
+                      <td>{{ order.services }}</td>
+                      <td>{{ order.artist }}</td>
+                      <td>{{ order.date }}</td>
+{#                      <td class="icon-t">#}
+{#                          <form action="{% url 'update_orders' order.pk %}" method="post">#}
+{#                              {% csrf_token %}#}
+{#                              <input type="hidden" name="approval" value="2">#}
+{#                              <input type="hidden" name="answer" value="True">#}
+{#                              <button type="submit" class="form-btn">#}
+{#                                  <i class="fas fa-times-circle text-danger"></i>#}
+{#                              </button>#}
+{#                          </form>#}
+{#                      </td>#}
+                    </tr>
+                      {% empty %}
+                      <tr>
+                      <td colspan="6" style="font-size: larger">
+                          لا توجد طلبات !
+                      </td>
+                      </tr>
+
+                   {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    {% endblock %}
+

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}إضافة موظفات - صالون{% endblock %}
+    {% block content %}
+     <style>
+        #wrapper #content-wrapper #content {
+        -ms-flex: 1 0 auto;
+        flex: 0 0 auto;
+}
+
+
+
+        </style>
+         <div class="container-fluid" style="position: relative">
+
+          <!-- Page Heading -->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+          <h1 class="h3 mb-2 text-brown">إضافة موظفة جديدة</h1>
+            </div>
+              <div class="card-body">
+                          <div class="container">
+
+        <form method="POST" class="post-form" action="{% url 'arts' %}">
+                {% csrf_token %}
+            <div class="form-group row">
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-4">
+                  <input placeholder="" id="id_salon" name="salon" type="hidden" value="{{ user.id }}" class="form-control" required autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">اسم الموظفة</label>
+            <div class="col-sm-4">
+                <input placeholder="" id="id_name" name="name" type="text" class="form-control" required autocomplete="off">
+            </div>
+          </div>
+
+
+ <div class="form-group row">
+            <label class="col-sm-2 col-form-label">الجنسية</label>
+            <div class="col-sm-4">
+                <input placeholder="" id="id_nationality" name="nationality" type="text" class="form-control" required autocomplete="off">
+            </div>
+          </div>
+
+{#   <select name="service" id="id_service" multiple="">#}
+{#  <option value="1">cut</option>#}
+{##}
+{#  <option value="2">makeup</option>#}
+{##}
+{#</select>#}
+
+
+{#            <div class="form-group row" >#}
+{#        <label class="col-sm-2 col-form-label">المهام:</label>#}
+{#<div class="col-sm-4">#}
+{#      <select  name="service" id="id_service" class="" multiple="">#}
+{#                <option value="" disabled="" selected="">تحديد الكل</option>#}
+{#                {% for task in services %}#}
+{#                    <option value="{{ task.id }}">{{ task.name }}</option>#}
+{#                {% endfor %}#}
+{#      </select>#}
+{#  </div>#}
+{##}
+{#</div>#}
+
+
+
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="exampleFormControlSelect2">المهام</label>
+            <div class="col-sm-4">
+               <select multiple class="form-control" id="id_service" name="service">
+                {% for task in services.all %}
+                    <option value="{{ task.id }}">{{ task.name }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            </div>
+{#         <div class="form-group row" >#}
+{##}
+{##}
+{#        <label for="id_weekend_days" class="col-sm-2 col-form-label">أيام الإجازة:</label>#}
+{##}
+{##}
+{##}
+         <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="exampleFormControlSelect2">أيام الإجازة</label>
+            <div class="col-sm-4">
+ <select class="form-control"  name="weekend_days" id="id_weekend_days"  multiple="">
+                {% for value, text in form.weekend_days.field.choices %}
+                    <option value="{{value}}">{{text}}</option>
+                {% endfor %}
+      </select>
+            </div>
+         </div>
+{# </div>#}
+            <div class="form-group row">
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-4">
+            <button type="submit" class="btn btn-brown form-control">إضافة</button>
+            </div>
+            </div>
+
+
+        </form>
+                                      </div>
+              </div>
+            </div>
+          </div>
+
+
+    {% endblock %}

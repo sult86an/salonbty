@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}إضافة خدمات - صالون{% endblock %}
+    {% block content %}
+        <style>
+        #wrapper #content-wrapper #content {
+        -ms-flex: 1 0 auto;
+        flex: 0 0 auto;
+}
+        </style>
+         <div class="container-fluid" style="position: relative">
+
+          <!-- Page Heading -->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+          <h1 class="h3 mb-2 text-brown">إضافة خدمات</h1>
+            </div>
+        <form method="POST"  action="{% url 'serv' %}">
+                {% csrf_token %}
+             <div class="card-body">
+            <div class="container">
+            <div class="form-group row">
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-4">
+                  <input placeholder="" id="id_salon" name="salon" type="hidden" value="{{ user.id }}" class="form-control" required autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">اسم الخدمة</label>
+            <div class="col-sm-4">
+                <input placeholder="" id="id_name" name="name" type="text" class="form-control" required autocomplete="off">
+            </div>
+          </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">سعر الخدمة</label>
+                <div class="col-sm-4">
+                    <input placeholder="" id="id_price" name="price" type="number" class="form-control" required autocomplete="off">
+                </div>
+           </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">الزمن المقدّر</label>
+                <div class="col-sm-4">
+                    <select id="id_minTime" name="minTime" class="form-control" required>
+                        <option value="">--  تحديد الوقت المقدر --</option>
+                        <option value="00:30">00:30</option>
+                        <option value="01:00">01:00</option>
+                        <option value="01:30">01:30</option>
+                        <option value="02:00">02:00</option>
+                        <option value="02:30">02:30</option>
+                        <option value="03:00">03:00</option>
+                        <option value="03:30">03:30</option>
+                        <option value="04:00">04:00</option>
+                    </select>
+                </div>
+            </div>
+                <br>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                <button type="submit" class="btn btn-brown form-control">إضافة</button>
+                </div>
+            </div>
+            </div>
+        </form>
+            </div>
+          </div>
+         </div>
+                {% endblock %}

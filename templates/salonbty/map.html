@@ -1,0 +1,164 @@
+<html >
+<header>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+   <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <title>جمع البيانات</title>
+</header>
+<body>
+
+                <div class="form-group">
+            <button class="form-control btn btn-warning" >موقعك الآن
+             <i class="glyphicon glyphicon-map-marker"></i></button>
+            </div>
+            <div class="form-group">
+              <div id="map" ></div>
+            </div>
+
+ <div class="panel panel-warning">
+      <div class="panel-heading">معلومات الموقع</div>
+      <div class="panel-body">
+      <div id="infoPanel">
+  <b>حالة المؤشر:</b>
+  <div id="markerStatus"><i>إضغط وحرّك المؤشر</i></div>
+  <b>موقعك الحالي:</b>
+  <div id="info"></div>
+  <input type="hidden" id="coor" value="">
+  <b>أقرب عنوان هو:</b>
+  <div id="address"></div>
+</div>
+    </div>
+                </div>
+                  <div class="form-group">
+            <p class="text-center" id="msg"></p>
+            </div>
+<style>
+  body{
+    text-align:center;
+  }
+  .gmap3{
+    margin: 20px auto;
+    border: 1px dashed #C0C0C0;
+    width: 500px;
+    height: 500px;
+  }
+</style>
+
+     <script>
+
+
+var map, infoWindow;
+var geocoder;
+
+function initMap() {
+  geocoder = new google.maps.Geocoder();
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: 24.6740903,
+      lng: 46.694911400000024
+    },
+    zoom:15
+  });
+  infoWindow = new google.maps.InfoWindow;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      var marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        draggable: true,
+        title: 'موقعك الحالي'
+      });
+      /*infoWindow.setPosition(pos);
+      infoWindow.setContent('Your position');
+      marker.addListener('click', function() {
+        infoWindow.open(map, marker);
+      });
+      infoWindow.open(map, marker);*/
+      map.setCenter(pos);
+
+
+      updateMarkerPosition(marker.getPosition());
+      geocodePosition(pos);
+
+      // Add dragging event listeners.
+      google.maps.event.addListener(marker, 'dragstart', function() {
+        updateMarkerAddress('إنتظار....');
+      });
+
+      google.maps.event.addListener(marker, 'drag', function() {
+        updateMarkerStatus('تحريك....');
+        updateMarkerPosition(marker.getPosition());
+      });
+
+      google.maps.event.addListener(marker, 'dragend', function() {
+        updateMarkerStatus('إنتهاء التحريك');
+        geocodePosition(marker.getPosition());
+        map.panTo(marker.getPosition());
+      });
+
+      google.maps.event.addListener(map, 'click', function(e) {
+        updateMarkerPosition(e.latLng);
+        geocodePosition(marker.getPosition());
+        marker.setPosition(e.latLng);
+        map.panTo(marker.getPosition());
+      });
+
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+
+}
+
+function geocodePosition(pos) {
+  geocoder.geocode({
+    latLng: pos
+  }, function(responses) {
+    if (responses && responses.length > 0) {
+      updateMarkerAddress(responses[0].formatted_address);
+    } else {
+      updateMarkerAddress('Cannot determine address at this location.');
+    }
+  });
+}
+
+function updateMarkerStatus(str) {
+  document.getElementById('markerStatus').innerHTML = str;
+}
+
+function updateMarkerPosition(latLng) {
+  document.getElementById('info').innerHTML = [
+    latLng.lat(),
+    latLng.lng()
+  ].join(', ');
+}
+
+function updateMarkerAddress(str) {
+  document.getElementById('address').innerHTML = str;
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.');
+  infoWindow.open(map);
+}
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIevSvpV-ONb4Pf15VUtwyr_zZa7ccwq4&callback=initMap">
+
+</script>
+</body>
+</html>

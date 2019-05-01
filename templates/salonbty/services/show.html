@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}إدارة الخدمات - صالون{% endblock %}
+    {% block content %}
+        <style>
+        #wrapper #content-wrapper #content {
+        -ms-flex: 1 0 auto;
+        flex: 0 0 auto;
+}
+        td{
+            text-align: center;
+        }
+        </style>
+         <div class="container-fluid" style="position: relative">
+
+          <!-- Page Heading -->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+          <h1 class="h3 mb-2 text-brown">إدارة الخدمات</h1>
+            </div>
+          <div class="card-body">
+        <table class="table table-striped table-bordered table-sm">
+              <thead style="background-color: #996668; color: white">
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">الخدمة</th>
+                <th class="text-center">السعر</th>
+                <th class="text-center">الوقت المقدّر</th>
+                <th class="text-center">تعديل</th>
+                <th class="text-center">حذف</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for service in services %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ service.name }}</td>
+                <td>{{ service.price }}</td>
+                <td>{{ service.minTime }}</td>
+                <td class="text-center">
+                    <a href="{% url 'update_service' service.id %}">
+                        <i class="fas fa-edit text-secondary"></i>
+                    </a>
+                </td>
+            <td>
+               <a href="{% url 'delete' service.id %}">
+                   <i class="far fa-trash-alt text-danger"></i>
+               </a>
+            </td>
+            </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <center><a href="{% url 'serv' %}" class="btn btn-brown">إضافة خدمة جديدة</a></center>
+            </div>
+          </div>
+         </div>
+            {% endblock %}
